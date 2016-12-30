@@ -41,7 +41,8 @@ sudo apt-get install -y php7.1-bz2
 sudo apt-get install -y php7.1-dev
 
 # Install PHP FANN:
-sudo apt-get install php7.1-libfann*
+sudo apt-get install -y libfann*
+
 cd /tmp/
 wget http://pecl.php.net/get/fann
 mkdir fann-latest
