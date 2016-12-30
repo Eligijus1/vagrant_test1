@@ -38,5 +38,28 @@ fi
 sudo apt-get install -y php7.1
 sudo apt-get install -y php7.1-xml 
 sudo apt-get install -y php7.1-bz2
+sudo apt-get install -y php7.1-dev
+
+# Install PHP FANN:
+sudo apt-get install php7.1-libfann*
+cd /tmp/
+wget http://pecl.php.net/get/fann
+mkdir fann-latest
+tar xvfz fann -C /tmp/fann-latest --strip-components=1
+cd /tmp/fann-latest/
+export LANGUAGE=en_US.UTF-8
+export LC_ALL=en_US.UTF-8
+phpize
+./configure
+make
+sudo cp -R /tmp/fann-latest/modules/* /usr/lib/php/20160303/
+sudo sh -c "echo 'extension=fann.so' > /etc/php/7.1/mods-available/fann.ini"
+sudo phpenmod fann
+
+sudo ln -s /etc/php/7.1/mods-available/fann.ini /etc/php/7.1/apache2/conf.d/30-fann.ini
+sudo service apache2 restart
+
+# Check loaded PHP modules:
+echo "Loaded PHP extensions:"
 php -m
 
