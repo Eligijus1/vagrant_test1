@@ -32,6 +32,11 @@ if ! [ -L /var/www ]; then
 fi
 
 # Installing PHP 7:
-sudo apt-get install -y php
+# sudo apt-get install -y php
 
+# Installing PHP 7.1 and some extra libraries:
+sudo apt-get install -y php7.1
+sudo apt-get install -y php7.1-xml 
+sudo apt-get install -y php7.1-bz2
+php -m
 
