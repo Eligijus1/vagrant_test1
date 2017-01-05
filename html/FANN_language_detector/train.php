@@ -4,6 +4,9 @@
  * by checking how often is used same letter. This is simple method, but it works.
  */
 
+// Define application start time:
+$milliseconds = round(microtime(true) * 1000);
+
 /**
  * Define network parameters.
  * 256 - input parameters amount. It should be equal to letter in alphabet amount.
@@ -14,8 +17,8 @@
  * 0.7 - learning rate. The learning rate is used to determine how aggressive training should be for some of
  *       the training algorithms
  */
-$ann = fann_create(array(256, 128, 3), 1.0, 0.7);
-
+// $ann = fann_create(array(256, 128, 3), 1.0, 0.7);
+/*
 fann_train($ann,
     array(
         array(
@@ -35,12 +38,16 @@ fann_train($ann,
     0.00001,
     1000
 );
-
+*/
 /**
  * Saves the entire network to a configuration file.
  */
-fann_save($ann, "classify.txt");
+// fann_save($ann, "classify.txt");
 
+//fann_destroy($ann);
+
+// Inform about application finish and print time used:
+echo "INFO: Done train.php in " . (round(microtime(true) * 1000) - $milliseconds) ." milliseconds<br>";
 
 /**
  * Method responsible to calculate letters using frequency.
@@ -49,6 +56,7 @@ fann_save($ann, "classify.txt");
  *
  * @return array
  */
+/*
 function generate_frequencies($text)
 {
     // Removed all, live just letters:
@@ -65,3 +73,4 @@ function generate_frequencies($text)
 
     return array_values($data);
 }
+*/
