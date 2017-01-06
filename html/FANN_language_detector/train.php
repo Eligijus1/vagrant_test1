@@ -27,10 +27,10 @@ $ann = fann_create_standard($num_layers, $num_input, $num_neurons_hidden, $num_o
 // Check if returns a neural network resource:
 if ($ann) {
     // Sets the activation function for all of the hidden layers (FANN_SIGMOID_SYMMETRIC - Symmetric sigmoid activation function, aka. tanh.):
-    fann_set_activation_function_hidden($ann, FANN_SIGMOID_SYMMETRIC);
+    //fann_set_activation_function_hidden($ann, FANN_SIGMOID_SYMMETRIC);
 
     // Sets the activation function for the output layer:
-    fann_set_activation_function_output($ann, FANN_SIGMOID_SYMMETRIC);
+    //fann_set_activation_function_output($ann, FANN_SIGMOID_SYMMETRIC);
 
     fann_train($ann,
         array(
