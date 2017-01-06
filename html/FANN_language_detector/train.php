@@ -32,6 +32,15 @@ if ($ann) {
     // Sets the activation function for the output layer:
     //fann_set_activation_function_output($ann, FANN_SIGMOID_SYMMETRIC);
 
+    // Delete old ANN model file:
+    if (is_file('classify.txt')) {
+        if (unlink('classify.txt')) {
+            echo 'INFO: deleted old ANN model file.<br>';
+        } else {
+            echo 'ERROR: old ANN model file deleting failed.<br>';
+        }
+    }
+
     fann_train($ann,
         array(
             array(
