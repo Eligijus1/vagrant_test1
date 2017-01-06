@@ -17,7 +17,7 @@ $milliseconds = round(microtime(true) * 1000);
  * 0.7 - learning rate. The learning rate is used to determine how aggressive training should be for some of
  *       the training algorithms
  */
-// $ann = fann_create(array(256, 128, 3), 1.0, 0.7);
+$ann = fann_create(array(256, 128, 3), 1.0, 0.7);
 /*
 fann_train($ann,
     array(
@@ -44,7 +44,8 @@ fann_train($ann,
  */
 // fann_save($ann, "classify.txt");
 
-//fann_destroy($ann);
+// Destroys the entire network and properly freeing all the associated memory:
+fann_destroy($ann);
 
 // Inform about application finish and print time used:
 echo "INFO: Done train.php in " . (round(microtime(true) * 1000) - $milliseconds) ." milliseconds<br>";
