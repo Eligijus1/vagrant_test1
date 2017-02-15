@@ -64,3 +64,14 @@ sudo service apache2 restart
 echo "Loaded PHP extensions:"
 php -m
 
+# Add DNS to /etc/resolv.conf
+echo "nameserver 8.8.8.8" | sudo tee -a /etc/resolv.conf
+echo "nameserver 8.8.4.4" | sudo tee -a /etc/resolv.conf
+
+# Install "Symfony Installer":
+sudo mkdir -p /usr/local/bin
+sudo curl -LsS https://symfony.com/installer -o /usr/local/bin/symfony
+sudo chmod a+x /usr/local/bin/symfony
+
+
+
