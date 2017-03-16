@@ -39,6 +39,7 @@ sudo apt-get install -y php7.1
 sudo apt-get install -y php7.1-xml 
 sudo apt-get install -y php7.1-bz2
 sudo apt-get install -y php7.1-dev
+sudo apt-get install -y php7.1-sqlite3
 
 # Install PHP FANN:
 sudo apt-get install -y libfann*
