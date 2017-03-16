@@ -73,5 +73,50 @@ sudo mkdir -p /usr/local/bin
 sudo curl -LsS https://symfony.com/installer -o /usr/local/bin/symfony
 sudo chmod a+x /usr/local/bin/symfony
 
+# Install "Symfony demo application":
+# cd /home/vagrant/
+# php /usr/local/bin/symfony demo
+# sudo chown -R www-data:vagrant var
+# mkdir logs
+# sudo chown -R www-data:vagrant logs
+# php bin/console security:check
+# echo "<Directory / >
+#     AllowOverride All
+# </Directory>
+# <VirtualHost *:*>
+#     ServerAdmin eligijus.stugys@gmail.com
+#     ServerName vagrant_test1.symfony_demo.dev
+#     ServerAlias www.vagrant_test1.symfony_demo.dev
+#     DocumentRoot /home/vagrant/symfony_demo/web/
+#     ErrorLog /home/vagrant/symfony_demo/logs/error.log
+#     CustomLog /home/vagrant/symfony_demo/logs/access.log combined
+# </VirtualHost>
+# " | sudo tee /etc/apache2/sites-available/vagrant_test1.symfony_demo.dev.conf
+# sudo a2ensite vagrant_test1.symfony_demo.dev.conf
+# 
+# sudo service apache2 stop
+# sudo service apache2 start
+# 
+# sudo vi /etc/hosts
+# 
+# 127.0.0.1       vagrant_test1.symfony_demo.dev
+# 
+# http://vagrant_test1.symfony_demo.dev
+
+
+# /etc/hosts
+
+
+
+# Install "Symfony demo application"
+# cd /var/www/html/
+# php /usr/local/bin/symfony demo
+# php bin/console security:check
+
+# Get IP information:
+# vagrant ssh -c "hostname -I | cut -d' ' -f2" 2>/dev/null
+# vagrant ssh
+# hostname -I | cut -d' ' -f2
+
 
 
