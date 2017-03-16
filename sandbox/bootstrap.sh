@@ -40,6 +40,11 @@ sudo apt-get install -y php7.1-xml
 sudo apt-get install -y php7.1-bz2
 sudo apt-get install -y php7.1-dev
 sudo apt-get install -y php7.1-sqlite3
+sudo apt-get install -y php7.1-curl
+sudo apt-get install -y php7.1-intl
+sudo apt-get install -y php7.1-gd
+sudo apt-get install -y php7.1-mbstring
+sudo apt-get install -y php7.1-zip
 
 # Install PHP FANN:
 sudo apt-get install -y libfann*
@@ -73,6 +78,13 @@ echo "nameserver 8.8.4.4" | sudo tee -a /etc/resolv.conf
 sudo mkdir -p /usr/local/bin
 sudo curl -LsS https://symfony.com/installer -o /usr/local/bin/symfony
 sudo chmod a+x /usr/local/bin/symfony
+
+# Install composer:
+cd /tmp/
+curl -sS https://getcomposer.org/installer | sudo php -- --install-dir=/usr/local/bin --filename=composer
+
+# Install git:
+sudo apt-get install -y git
 
 # Install "Symfony demo application":
 cd /home/vagrant/
@@ -113,6 +125,9 @@ php bin/console doctrine:fixtures:load
 php /usr/local/bin/symfony demo
 sudo chown -R www-data:vagrant symfony_demo
 sudo chmod -R 775 symfony_demo
+
+# Install Sylius:
+# composer create-project -s beta sylius/sylius-standard sylius
 
 
 
