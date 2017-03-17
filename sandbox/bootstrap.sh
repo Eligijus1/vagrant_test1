@@ -45,6 +45,7 @@ sudo apt-get install -y php7.1-intl
 sudo apt-get install -y php7.1-gd
 sudo apt-get install -y php7.1-mbstring
 sudo apt-get install -y php7.1-zip
+sudo apt-get install -y php7.1-mysql
 
 # Install PHP FANN:
 sudo apt-get install -y libfann*
@@ -85,6 +86,11 @@ curl -sS https://getcomposer.org/installer | sudo php -- --install-dir=/usr/loca
 
 # Install git:
 sudo apt-get install -y git
+
+# Install npm and node:
+sudo apt-get install -y npm
+sudo apt-get install -y node
+sudo apt-get install -y nodejs-legacy
 
 # Install "Symfony demo application":
 cd /home/vagrant/
