@@ -132,6 +132,36 @@ php /usr/local/bin/symfony demo
 sudo chown -R www-data:vagrant symfony_demo
 sudo chmod -R 775 symfony_demo
 
+# Install MailHog:
+sudo apt install -y docker.io
+sudo apt install -y golang-go
+export GOPATH=~/go
+cd ~/
+wget https://github.com/mailhog/MailHog/releases/download/v0.2.1/MailHog_linux_amd64
+sudo mv MailHog_linux_amd64 /usr/bin/mailhog
+go get github.com/mailhog/mhsendmail
+sudo ln -s ~/go/bin/mhsendmail /usr/bin/mhsendmail
+sudo ln -s ~/go/bin/mhsendmail /usr/bin/sendmail
+sudo ln -s ~/go/bin/mhsendmail /usr/bin/mail
+echo "sendmail_path = /usr/bin/mhsendmail" | sudo tee -a /etc/php/7.1/cli/php.ini
+echo "sendmail_path = /usr/bin/mhsendmail" | sudo tee -a /etc/php/7.1/apache2/php.ini
+sudo service apache2 stop
+sudo service apache2 start
+docker run -d -p 1025:1025 -p 8025:8025 mailhog/mailhog
+echo "" | tee -a ~/.bashrc
+echo "# GO envarment variables:" | tee -a ~/.bashrc
+echo "export GOPATH=~/go" | tee -a ~/.bashrc
+echo "export PATH=\$PATH:$GOPATH/bin" | tee -a ~/.bashrc
+sudo tee /etc/init/mailhog.conf <<EOL
+description "Mailhog"
+start on runlevel [2345]
+stop on runlevel [!2345]
+respawn
+pre-start script
+    docker run -d -p 1025:1025 -p 8025:8025 mailhog/mailhog 1>/dev/null 2>&1
+end script
+EOL
+
 # Install Sylius:
 # composer create-project -s beta sylius/sylius-standard sylius
 

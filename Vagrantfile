@@ -17,9 +17,9 @@ Vagrant.configure("2") do |config|
     # hostname will be set on boot.
     config.vm.hostname = "vagrant.test1.dev"
 
-    # Configures networks on the machine. Please see the networking 
-    # page for more information.
-    config.vm.network "private_network", type: "dhcp"
+    # Configures networks on the machine:
+    # config.vm.network "private_network", type: "dhcp"
+    config.vm.network "private_network", ip: "172.28.128.10"
     
     if Vagrant.has_plugin?("vagrant-hostmanager")
         config.hostmanager.enabled = true
