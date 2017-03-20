@@ -125,7 +125,7 @@ echo "<VirtualHost *:80>
 sudo a2ensite symfony.demo.vagrant.test1.dev.conf
 sudo service apache2 stop
 sudo service apache2 start
-mkdir var/data
+mkdir /home/vagrant/symfony_demo/var/data
 php bin/console doctrine:schema:update --force
 php bin/console doctrine:fixtures:load
 php /usr/local/bin/symfony demo
