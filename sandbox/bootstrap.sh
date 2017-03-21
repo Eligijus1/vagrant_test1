@@ -93,20 +93,15 @@ sudo apt-get install -y node
 sudo apt-get install -y nodejs-legacy
 
 # Install "Symfony demo application":
-cd /home/vagrant/
-php /usr/local/bin/symfony demo
-sudo chown -R www-data:vagrant symfony_demo
-sudo chmod -R 775 symfony_demo
-cd /home/vagrant/symfony_demo
-php bin/console cache:clear --env=prod
-php bin/console cache:clear --env=dev
-sudo chown -R www-data:vagrant var
-sudo chmod -R 775 var
-mkdir logs
-sudo chown -R www-data:vagrant logs
-php bin/console security:check
-sudo chown -R www-data:vagrant logs
-sudo chmod -R 775 logs
+echo "------------- BEGIN Symfony demo application install -----------"
+sudo -H -u vagrant bash -c 'cd /home/vagrant/ && php /usr/local/bin/symfony demo'
+sudo chown -R www-data:vagrant /home/vagrant/symfony_demo
+sudo chmod -R 775 /home/vagrant/symfony_demo
+sudo -H -u vagrant bash -c 'cd /home/vagrant/symfony_demo && php bin/console cache:clear --env=prod && php bin/console cache:clear --env=dev'
+sudo mkdir /home/vagrant/symfony_demo/logs
+sudo chown -R www-data:vagrant /home/vagrant/symfony_demo
+sudo chmod -R 775 /home/vagrant/symfony_demo
+sudo -H -u vagrant bash -c 'cd /home/vagrant/symfony_demo && php bin/console security:check'
 echo "<VirtualHost *:80>
      ServerAdmin eligijus.stugys@gmail.com
      ServerName symfony.demo.vagrant.test1.dev
@@ -126,11 +121,10 @@ sudo a2ensite symfony.demo.vagrant.test1.dev.conf
 sudo service apache2 stop
 sudo service apache2 start
 mkdir /home/vagrant/symfony_demo/var/data
-php bin/console doctrine:schema:update --force
-php bin/console doctrine:fixtures:load
-php /usr/local/bin/symfony demo
-sudo chown -R www-data:vagrant symfony_demo
-sudo chmod -R 775 symfony_demo
+sudo -H -u vagrant bash -c 'cd /home/vagrant/symfony_demo && php bin/console doctrine:schema:update --force && php bin/console doctrine:fixtures:load'
+sudo chown -R www-data:vagrant /home/vagrant/symfony_demo
+sudo chmod -R 775 /home/vagrant/symfony_demo
+echo "------------- END Symfony demo application install -------------"
 
 # Install docker:
 sudo apt install -y docker.io
@@ -148,7 +142,6 @@ echo "export PATH=\$PATH:$GOPATH/bin" | tee -a ~/.bashrc
 # echo "export PATH=\$PATH:$GOPATH/bin" | tee -a /home/vagrant/.bashrc
 
 # Install MailHog:
-echo "------------------------------ BEGIN MailHog install -----------"
 cd ~/
 wget https://github.com/mailhog/MailHog/releases/download/v0.2.1/MailHog_linux_amd64
 sudo mv MailHog_linux_amd64 /usr/bin/mailhog
@@ -156,6 +149,8 @@ go get github.com/mailhog/mhsendmail
 sudo ln -s ~/go/bin/mhsendmail /usr/bin/mhsendmail
 sudo ln -s ~/go/bin/mhsendmail /usr/bin/sendmail
 sudo ln -s ~/go/bin/mhsendmail /usr/bin/mail
+echo "date.timezone = Europe/Vilnius" | sudo tee -a /etc/php/7.1/cli/php.ini
+echo "date.timezone = Europe/Vilnius" | sudo tee -a /etc/php/7.1/apache2/php.ini
 echo "sendmail_path = /usr/bin/mhsendmail" | sudo tee -a /etc/php/7.1/cli/php.ini
 echo "sendmail_path = /usr/bin/mhsendmail" | sudo tee -a /etc/php/7.1/apache2/php.ini
 sudo service apache2 stop
@@ -170,7 +165,6 @@ pre-start script
     docker run -d -p 1025:1025 -p 8025:8025 mailhog/mailhog 1>/dev/null 2>&1
 end script
 EOL
-echo "------------------------------ BEGIN MailHog install -----------"
 
 # Install Sylius:
 # echo "------------------------------ BEGIN Sylius install ------------"
