@@ -10,4 +10,6 @@ This is test box for playig and testing.
 172.28.128.10    sylius.vagrant.test1.dev
 ```
 
+**Install Sylius (vagrant ssh)**
+[Install Sylius (vagrant ssh)](doc/sylius_setup.md)
 
