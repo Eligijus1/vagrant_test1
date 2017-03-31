@@ -57,13 +57,18 @@ echo "parameters:
     secret: EDITME
     locale: en_US
 " | tee /home/vagrant/sylius/app/config/parameters.yml
-``` 
+```
 
 ```
 cd /home/vagrant/sylius/
 npm install
 npm run gulp
 php bin/console sylius:install:check-requirements
+```
+
+```
+Maybe need update npm (if npm install fails):
+sudo npm install npm -g
 ```
 
 ```
@@ -80,12 +85,13 @@ sudo chown -R www-data:vagrant sylius
 sudo chmod -R 775 sylius
 ```
 
+```
 vim web/app_dev.php (tune, to alow access)
+```
 
+```
 http://sylius.vagrant.test1.dev/app_dev.php
-
 http://sylius.vagrant.test1.dev/app_dev.php/admin/login
-
 sylius_admin@gmail.com / pass
-
+```
 
