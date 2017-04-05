@@ -93,7 +93,6 @@ sudo apt-get install -y node
 sudo apt-get install -y nodejs-legacy
 
 # Install "Symfony demo application":
-echo "------------- BEGIN Symfony demo application install -----------"
 sudo -H -u vagrant bash -c 'cd /home/vagrant/ && php /usr/local/bin/symfony demo'
 sudo chown -R www-data:vagrant /home/vagrant/symfony_demo
 sudo chmod -R 775 /home/vagrant/symfony_demo
@@ -124,7 +123,6 @@ mkdir /home/vagrant/symfony_demo/var/data
 sudo -H -u vagrant bash -c 'cd /home/vagrant/symfony_demo && php bin/console doctrine:schema:update --force && php bin/console doctrine:fixtures:load'
 sudo chown -R www-data:vagrant /home/vagrant/symfony_demo
 sudo chmod -R 775 /home/vagrant/symfony_demo
-echo "------------- END Symfony demo application install -------------"
 
 # Install docker:
 sudo apt install -y docker.io
@@ -166,4 +164,11 @@ pre-start script
 end script
 EOL
 
+# Install RabbitMQ:
+sudo apt-get install rabbitmq-server -y
+sudo rabbitmq-plugins enable rabbitmq_web_stomp
+sudo rabbitmq-plugins enable mochiweb
+sudo rabbitmq-plugins enable rabbitmq_management
+sudo rabbitmq-plugins enable rabbitmq_web_stomp_examples
+sudo service rabbitmq-server restart
 
