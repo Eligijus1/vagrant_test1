@@ -46,6 +46,7 @@ sudo apt-get install -y php7.1-gd
 sudo apt-get install -y php7.1-mbstring
 sudo apt-get install -y php7.1-zip
 sudo apt-get install -y php7.1-mysql
+sudo apt-get install -y php7.1-bcmath
 
 # Install PHP FANN:
 sudo apt-get install -y libfann*
@@ -91,6 +92,7 @@ sudo apt-get install -y git
 sudo apt-get install -y npm
 sudo apt-get install -y node
 sudo apt-get install -y nodejs-legacy
+sudo npm install -g bower
 
 # Install "Symfony demo application":
 sudo -H -u vagrant bash -c 'cd /home/vagrant/ && php /usr/local/bin/symfony demo'
