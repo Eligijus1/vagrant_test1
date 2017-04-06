@@ -47,6 +47,8 @@ sudo apt-get install -y php7.1-mbstring
 sudo apt-get install -y php7.1-zip
 sudo apt-get install -y php7.1-mysql
 sudo apt-get install -y php7.1-bcmath
+sudo apt-get install -y php7.1-xdebug
+sudo apt-get install -y php7.1-apc
 
 # Install PHP FANN:
 sudo apt-get install -y libfann*
