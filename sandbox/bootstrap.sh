@@ -176,3 +176,41 @@ sudo rabbitmq-plugins enable rabbitmq_management
 sudo rabbitmq-plugins enable rabbitmq_web_stomp_examples
 sudo service rabbitmq-server restart
 
+# Install symfony3_test
+sudo -H -u vagrant bash -c 'cd /home/vagrant/ && mkdir symfony3_test'
+
+mysql -u root --port=3306 -proot -t <<EOF
+SHOW DATABASES;
+CREATE DATABASE symfony3_test;
+SHOW DATABASES;
+EOF
+
+mysqladmin -u root --port=3306 -proot reload
+
+echo "<VirtualHost *:80>
+     ServerAdmin admin@symfony3_test.lt
+     ServerName symfony3_test.vagrant.test1.dev
+     ServerAlias www.symfony3_test.vagrant.test1.dev
+
+     DocumentRoot /home/vagrant/symfony3_test/web
+     <Directory /home/vagrant/symfony3_test/web>
+          AllowOverride All
+          Require all granted
+     </Directory>
+
+     ErrorLog /home/vagrant/symfony3_test/logs/error.log
+     CustomLog /home/vagrant/symfony3_test/logs/access.log combined
+</VirtualHost>
+" | sudo tee /etc/apache2/sites-available/symfony3_test.vagrant.test1.dev.conf
+
+cd /home/vagrant/
+mkdir /home/vagrant/symfony3_test/logs
+mkdir /home/vagrant/symfony3_test/web
+sudo chown -R www-data:vagrant symfony3_test
+sudo chmod -R 775 symfony3_test
+
+sudo a2ensite symfony3_test.vagrant.test1.dev.conf
+sudo service apache2 stop
+sudo service apache2 start
+
+
