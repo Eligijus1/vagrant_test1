@@ -191,6 +191,8 @@ echo "<VirtualHost *:80>
      ServerAdmin admin@symfony3_test.lt
      ServerName symfony3_test.vagrant.test1.dev
      ServerAlias www.symfony3_test.vagrant.test1.dev
+     ServerAlias symfony3testvagranttest1.dev
+     ServerAlias www.symfony3testvagranttest1.dev
 
      DocumentRoot /home/vagrant/symfony3_test/web
      <Directory /home/vagrant/symfony3_test/web>
